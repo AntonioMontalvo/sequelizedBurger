@@ -20,8 +20,7 @@ router.get('/index', function(req, res){
 			// return res.json(result);
 		});
 });
-
-// //CREATE
+//CREATE
 
 router.post('/create', function (req, res){
 	// Take the request...
@@ -32,26 +31,28 @@ router.post('/create', function (req, res){
 		res.redirect('/index');	
 });
 
+//UPDATE
 
 
+router.put('/update/:id', function(req, res){
+	var condition = req.params.id;
+	var userMunchies = req.body.burger_name;
 
-// router.post('/create', function (req, res) {
-// 	burger.insertOne(['burger_name'], [req.body.burger_name], function () {
-// 		res.redirect('/index');
-// 	});
-// });
+	Burger.findOne({where: {burger_name: userMunchies} })
+		.then(
+			Burger.update(
+				{
+					devoured: true
+				},
+				{
+					where: {id: condition}
+				}
+				)
+			);
 
-// //UPDATE
-// router.put('/update/:id', function (req, res) {
-// 	var condition = 'id = ' + req.params.id;
+	res.redirect('/index');	
 
-// 	// console.log('condition', condition);
-// 	// console.log(req.body.burger_name);
-// 	burger.updateOne({ burger_name: req.body.burger_name }, condition, function () {
-// 		res.redirect('/index');
-// 	});
-// });
-
+});
 
 
 
