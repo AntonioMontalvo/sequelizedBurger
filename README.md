@@ -1,166 +1,69 @@
-# burger
+Burger 2: The Sequel!
 
-### Eat-Da-Burger!
+### Before you Begin
+1. Create a new folder called `sequelizedBurger`
+2. Copy the contents of your completed assignment from last week.
+	* Remove the older git connection with `rm -R .git`. 
+	* Then connect this folder with a new github repo.
+3. Run `sequelize init` to create the neccesary sequel files.
 
-* Eat-Da-Burger! is a restaurant app that lets users input the names of burgers they'd like to eat.
+* **Note**: If for any reason you don't have a finished assignment for last week, no problem. Message the instructor, who will provide you will a skeleton file to work of for this week.
 
-* Whenever a user submits a burger's name, your app will display the burger on the left side of the page -- waiting to be devoured.
-
-* Each burger in the waiting area also has a `Devour it!` button. When the user clicks it, the burger will move to the right side of the page.
-
-* Your app will store every burger in a database, whether devoured or not.
-
-## Instructions
-
-#### App Setup
-
-1. Create a GitHub repo called `burger` and clone it to your computer.
-
-2. Make a package.json file by running `npm init` from the command line.
-
-3. Install the Express npm package: `npm install express --save`.
-
-4. Create a server.js file.
-
-5. Install the Handlebars npm package: `npm install express-handlebars --save`.
-
-6. Install the method-override npm package: `npm install method-override --save`.
-
-7. Install the body-parser npm package: `npm install body-parser --save`.
-
-8. Install MySQL npm package: `npm install mysql --save`.
-
-10. Require the following npm packages inside of the server.js file:
-	* express
-	* method-override
-	* body-parser
-
-#### DB Setup:
-
-1. Inside your `burger` directory, create a folder named `db`.
-
-2. In the `db` folder, create a file named `schema.sql`. Write SQL queries this file that do the following:
-	* Create the `burgers_db`.
-	* Switch to or use the `burgers_db`.
-	* Create a `burgers` table with these fields:
-		* **id**: an auto incrementing int that serves as the primary key.
-		* **burger_name**: a string.
-		* **devoured**: a boolean.
-		* **date**: a TIMESTAMP.
-
-4. Still in the `db` folder, create a `seeds.sql` file. In this file, write insert queries to populate the `burgers` table with at least three entries.
-
-7. Run the `schema.sql` and `seeds.sql` files into the mysql server from the command line
-
-8. Now you're going to run these SQL files. 
-	* Make sure you're in the `db` folder of your app.
-
-	* Start MySQL command line tool and login: `mysql -u root -p`.
-
-	* With the `mysql>` command line tool running, enter the command `source schema.sql`. This will run your schema file and all of the queries in it -- in other words, you'll be creating your database.
-
-	* Now insert the entries you defined in `seeds.sql` by running the file: `source seeds.sql`.
-
-	*
-	 Close out of the MySQL command line tool: `exit`.
-
-#### Config Setup:
-
-1. Inside your `burger` directory, create a folder named `config`.
-
-2. Create a `connection.js` file inside `config` directory.
-
-	* Inside the `connection.js` file, setup the code to connect Node to MySQL.
-
-	* Export the connection.
-
-3. Create an `orm.js` file inside `config` directory.
-
-	* Import (require) `connection.js` into `orm.js`
-
-	* In the `orm.js` file, create the methods that will execute the necessary MySQL commands in the controllers. These are the methods you will need to use in order to retrieve and store data in your database.
-		* `selectAll()` 
-		* `insertOne()` 
-		* `updateOne()` 
-
-	* Export the ORM object in `module.exports`.
-
-#### Model setup:
-
-* Inside your `burger` directory, create a folder named `models`.
-
-	* In `models`, make a `burger.js` file.
-
-		* Inside `burger.js`, import `orm.js` into `burger.js`
-
-		* Also inside `burger.js`, create the code that will call the ORM functions using burger specific input for the ORM.
-
-		* Export at the end of the `burger.js` file.
-
-#### Controller setup:
-
-1. Inside your `burger` directory, create a folder named `controllers`.
-
-2. In `controllers`, create the `burgers_controller.js` file.
-
-3. Inside the `burgers_controller.js` file, import the following:
-	* Express
-	* `burger.js`
-
-4. Create the `router` for the app, and export the `router` at the end of your file.
-
-#### View setup:
-
-1. Inside your `burger` directory, create a folder named `views`.
-
-	* Create the `index.handlebars` file inside `views` directory.
-
-	* Create the `layouts` directory inside `views` directory.
-
-		* Create the `main.handlebars` file inside `layouts` directory.
-
-		* Setup the `main.handlebars` file so it's able to be used by Handlebars.
-
-		* Setup the `index.handlebars` to have the template that Handlebars can render onto.
-
-		* Create a button in `index.handlebars` that will submit the user input into the database.
-
-#### Directory structure:
-All the recommended files and directories from the steps above should look like the following structure:
-```
-.
-├── config
-│   ├── connection.js
-│   └── orm.js
-│ 
-├── controllers
-│   └── burgers_controller.js
-│
-├── db
-│   ├── schema.sql
-│   └── seeds.sql
-│
-├── models
-│   └── burger.js
-│ 
-├── node_modules
-│ 
-├── package.json
-│
-├── public
-│   ├── assets
-│   │   ├── css
-│   │   │   └── burger_style.css
-│   │   └── img
-│   │       └── burger.png
-│   └── test.html
-│
-├── server.js
-│
-└── views
-    ├── index.handlebars
-    └── layouts
-        └── main.handlebars
-```
+## Instructions 
+Put in your best efforts to complete one of these three challenge tiers:
 
 
+#### Tier 1: Sequelized! (Easy to Moderate)
+
+* Remove all references to your vanilla MySQL queries and replace them with Sequelize queries.
+
+* That means:
+	* Replacing your MySQL `Burger` model with a Sequelized equivalent.
+		* Don't forget to edit the model and initial migration file to make the burger's devoured field carry a default value of false -- otherwise you might encounter bugs.
+			* There's no option to include that default in the command line, so you'll need to open up Sublime to make this change. 
+		* Don't forget to sync the models!
+
+	* Edit your new `config.json` file to include your database configurations. Place your JawsDB details in the `production` property of your json file; the details of your local database go in the `developer` property.
+
+	* Remove your old ORM file, as well as any references to it in `burgers_controller.js`. Replace those references with Sequelize's ORM methods.
+
+* When you finish, your site should function just like your last one:
+	
+	![1-Sequelized](Images/1-Sequelized.jpg)
+
+
+#### Tier 2: Migrated! (Moderate to Hard)
+
+* Now that your burger app's ready, enter in some dummy data to test it out.
+
+* Using the `Sequelize CLI`, create a migration file that bulk inserts at least five burgers into your database. 
+
+	![2-Migrated](Images/2-Migrated.jpg)
+
+* Don't forget to define both the `up` and `down` methods in your migration file. If you create data when running `sequelize db:migrate`, you need to be able to remove that data with `sequelize db:migrate:undo`.
+
+* **HERE'S THE REAL CHALLENGE**: In your `down` method, how can you make sure that the ids of your burgers go back to the smallest available integer.
+	* For example, say you have burgers in your database with ids 1, 2, 3, 4 and 5. Running `sequelize db:migrate:undo` will remove those burgers. But then `sequelize db:migrate` places them back into the database with ids 6, 7, 8, 9 and 10 -- even though there are no burgers with ids less than 6. How can you stop this id gap from occurring?
+
+
+#### Tier 3: Associated! (Hard)
+
+* Add in an association of your choice to the project. This will involve creating at least one new model and connecting it with your Burger model.
+
+* Get creative! This solution is up to you.
+
+* For example, you could make a site that logs the names of the customers who eat your burgers. If you can't think of another type of association, try this one!
+
+	![3-Associated](Images/3-Associated.jpg)
+
+* If you do go select this tier, you must edit the handlebars files and CSS stylesheets to implement some sort of additional feature to the site. We don't want you to just connect two models and submit your project. Make your site do something relevant to this association.
+
+
+-------
+### One More Thing
+If you have any questions about this project or about the material we covered, the instructor and your TAs are only a Slack message away.
+
+**Good Luck!**
+
+## Copyright
+Coding Boot Camp (C) 2016. All Rights Reserved.
