@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 	res.redirect('/index');
 });
 
-
+//READ
 router.get('/index', function(req, res){
 	Burger.findAll({})
 		.then(function(result){
@@ -21,20 +21,20 @@ router.get('/index', function(req, res){
 		});
 });
 
-
-
-
-//READ
-//when the client requets '/index' it calls the burger.selectAll method and passes an anonymous function. This function has a parameter data. The argument given to data is the result 'stored' as a response from the orm.all method. Once the data is obtained the function gives an object to handlebars which will be render in index.handlebars
-// router.get('/index', function (req, res) {
-// 	burger.selectAll(function (data) {
-// 		var hbsObject = { burger: data };
-// 		console.log(hbsObject);
-// 		res.render('index', hbsObject);
-// 	});
-// });
-
 // //CREATE
+
+router.post('/create', function (req, res){
+	// Take the request...
+		var userMunchies = req.body.burger_name;
+		Burger.create({
+			burger_name: userMunchies
+		});
+		res.redirect('/index');	
+});
+
+
+
+
 // router.post('/create', function (req, res) {
 // 	burger.insertOne(['burger_name'], [req.body.burger_name], function () {
 // 		res.redirect('/index');
