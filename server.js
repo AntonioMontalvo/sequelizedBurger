@@ -14,10 +14,45 @@ var app = express();
 app.use(express.static(process.cwd() + '/public'));
 
 app.use(bodyParser.urlencoded({
-	extended: false
+	extended: true
 }));
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'));
+
+
+//SEQUELIZE
+// and we bring in our models folder. This brings in the model's object, as defined in index.js
+var models  = require('./models');
+
+console.log(models.Burger.Instance.prototype)
+
+// extract our sequelize connection from the models object, to avoid confusion
+var sequelizeConnection = models.sequelize
+
+// PREPARE OUR TABLES 
+// We run this query so that we can drop our tables even though they have foreign keys
+sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
+
+//sync the table
+.then(function(){
+	return sequelizeConnection.sync({force:true}); //{force:true} is for development only
+})
+
+.then(function(){
+	return models.Burger.create(
+		{
+			burger_name: "Triple Cheese Burger", 
+		}
+	)
+})
+.then(function(){
+	return models.Burger.create(
+		{
+			burger_name: "Quadruple Cheese Burger", 
+		}
+	)
+})
+
 
 //SET UP HANDLEBARS AND CONFIGURE
 var exphbs = require('express-handlebars');

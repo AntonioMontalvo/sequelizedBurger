@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes){
 			type: DataTypes.STRING
 		},
 		devoured: {
-			type: Sequelize.BOOLEAN,
+			type: DataTypes.BOOLEAN,
 			defaultValue: false
 		}
 	}, {
@@ -27,5 +27,5 @@ module.exports = function(sequelize, DataTypes){
   })
 
 	// Finally, we return the Manager model to the Module
-	return Manager;
+	return Burger;
 }
