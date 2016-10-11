@@ -58,12 +58,3 @@ Put in your best efforts to complete one of these three challenge tiers:
 
 * If you do go select this tier, you must edit the handlebars files and CSS stylesheets to implement some sort of additional feature to the site. We don't want you to just connect two models and submit your project. Make your site do something relevant to this association.
 
-
--------
-### One More Thing
-If you have any questions about this project or about the material we covered, the instructor and your TAs are only a Slack message away.
-
-**Good Luck!**
-
-## Copyright
-Coding Boot Camp (C) 2016. All Rights Reserved.
