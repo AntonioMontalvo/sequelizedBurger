@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-12 page-header">
+  	<img src="/assets/images/burger.jpeg">
+  	<h1>Eat-Da_Burger!</h1>
+  </div>
+</div>
+
+
+
+{{!-- here we use the {{#if}} helper to conditionally render a block. If its argument returns false, undefined, null "", 0, or [], handlebars will not render the block.Because our database table has a column sleepy with values 0 or 1, we use this.sleepy to evaluate this condition. --}}
+<div class="row">
+ <div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-4">
+	 <h3>TO BE EATEN</h3> 
+	   <ul>
+	  	{{#each burger}}
+		    {{#unless this.devoured}}
+		      <li>
+		        {{this.id}}
+		        {{this.burger_name}}
+
+		        <form action="/update/{{this.id}}?_method=PUT" method="POST">
+		        <input type="hidden" name="burger_name" value="{{this.burger_name}}">
+		        <button class="btn btn-default btn-xs devour" type="submit">Devour it!</button>
+		        </form>
+		      </li> 
+		    {{/unless}}
+		  {{/each}}
+	  </ul>
+  </div>
+  <div class="col-md-4">
+     <h3>DEVOURED</h3>
+	  	<ul>
+		  {{#each burger}}
+		    {{#if this.devoured}}
+		      <li>
+		        {{this.id}}
+		        {{this.burger_name}}
+		      </li>
+		    {{/if}}
+		  {{/each}}
+		</ul>
+  </div>	
+  <div class="col-md-2"></div>
+</div>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+  	<form action= "/create" method="POST">
+  	  <textarea class="form-control" rows="3" name="burger_name"></textarea>
+  	  <button class="request btn btn-primary" type="submit">Submit</button>
+  	</form>	
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
