@@ -23,6 +23,8 @@ app.use(methodOverride('_method'));
 //SEQUELIZE
 // and we bring in our models folder. This brings in the model's object, as defined in index.js
 var models  = require('./models');
+var lovedBurger;
+var anotherLovedBurger;
 
 console.log(models.Burger.Instance.prototype)
 
@@ -42,16 +44,57 @@ sequelizeConnection.query('SET FOREIGN_KEY_CHECKS = 0')
 	return models.Burger.create(
 		{
 			burger_name: "Triple Cheese Burger", 
+			Lover: {
+				fullName: "Mr Yemerson"
+			}
+		},
+		{
+			include: [models.Lover]
 		}
 	)
+	.then(function(TripleCheeseBurger){
+		return lovedBurger = TripleCheeseBurger;
+	});
 })
 .then(function(){
 	return models.Burger.create(
 		{
 			burger_name: "Quadruple Cheese Burger", 
+			Lover: {
+				fullName: "Jonnie Pesao"
+			}
+		},
+		{
+			include: [models.Lover]
 		}
 	)
+	.then(function(QuadrupleCheeseBurger){
+		return anotherLovedBurger = QuadrupleCheeseBurger;
+	});
 })
+
+.then(function(){
+	return models.Lover.create(
+		{
+			fullName: "Johnnie Pesao", 
+		}
+	)
+	.then(function(Pesao){
+		return lovedBurger.addLover(Pesao);
+	})
+})
+.then(function(){
+	return models.Lover.create(
+		{
+			fullName: "Mr. Yemerson", 
+		}
+	)
+	.then(function(Yemerson){
+		return anotherLovedBurger.addLover(Yemerson);
+	})
+})
+
+
 
 
 //SET UP HANDLEBARS AND CONFIGURE

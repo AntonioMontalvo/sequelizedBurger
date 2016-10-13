@@ -15,13 +15,11 @@ module.exports = function(sequelize, DataTypes){
 		}
 	}, {
 		classMethods: {
-			// OUR hasOne() RELATION
-			// associate gets called within index.js,
-			// and mergers this model with models.Store
-			// The foreign key will be placed on the Store table
+			
+			// The foreign key will be placed on the lovers table
 
       associate: function(models) {
-      	//
+      	Burger.hasMany(models.Lover);
       }
     }
   })

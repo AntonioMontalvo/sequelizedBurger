@@ -4,22 +4,38 @@ Here is where you create all the functions that will do the routing for your app
 var express = require('express');
 var router = express.Router();// I control the routes.
 var Burger = require('../models')['Burger'];//access to the database. Pulls out the Burger Model
-
+var Lover = require('../models')['Lover'];
 //the first time the server recieves a request if is '/'. It redirects to '/index'.
 router.get('/', function (req, res) {
 	res.redirect('/index');
 });
 
 //READ
+// router.get('/index', function(req, res){
+// 	Burger.findAll({})
+// 		.then(function(result){
+// 			var hbsObject = { burger: result };
+// 			res.render('index', hbsObject);
+// 			// return res.json(result);
+// 		});
+
+// });
+
 router.get('/index', function(req, res){
-	Burger.findAll({})
+		
+		Lover.findAll({})
+		Burger.findAll({})
 		.then(function(result){
-			var hbsObject = { burger: result };
-			// console.log(hbsObject);
+			var hbsObject = { 
+				lover: result,
+				burger: result
+			};
 			res.render('index', hbsObject);
-			// return res.json(result);
-		});
+		})
 });
+
+
+
 //CREATE
 
 router.post('/create', function (req, res){
